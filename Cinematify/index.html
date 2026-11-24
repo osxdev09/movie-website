@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cinematify - Movie Streaming</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    
+    <header id="home">
+        <nav class="navbar">
+            <div class="logo">Cinema<span>tify</span></div>
+            <div class="icons desktop-nav">
+                <ul>
+                    <li><a href="#home" class="active">Home</a></li>
+                    <li><a href="#moviehead">Movies</a></li>
+                    <li><a href="#news">News</a></li>
+                </ul>
+                <a href="signin.html"><button class="signin-btn">Sign In</button></a>
+            </div>
+        </nav>
+        
+        <div class="hero-content">
+            <div class="hero-badge">Featured</div>
+            <h1 class="hero-title">The Batman</h1>
+            <p class="hero-desc">When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.</p>
+            <div class="hero-meta">
+                <span class="rating"><i class="fas fa-star"></i> 9.0</span>
+                <span class="duration"><i class="fas fa-clock"></i> 2h 32min</span>
+                <span class="year">2008</span>
+                <span class="genre">Action, Crime, Drama</span>
+            </div>
+            <div class="hero-buttons">
+                <a href="watch.html?movie=dark-knight" class="btn-primary"><i class="fas fa-play"></i> Watch Now</a>
+                <a href="movie-detail.html?movie=dark-knight" class="btn-secondary"><i class="fas fa-info-circle"></i> More Info</a>
+            </div>
+            <div class="hero-date">
+                <h5><i class="fas fa-calendar-alt"></i> June 15, 2026 <br><span>IMAX 3D</span></h5>
+            </div>
+        </div>
+        
+        <div class="hero-slider-dots">
+            <span class="dot active" onclick="changeSlide(0)"></span>
+            <span class="dot" onclick="changeSlide(1)"></span>
+            <span class="dot" onclick="changeSlide(2)"></span>
+        </div>
+    </header>
+
+
+    <section class="sec1" id="moviehead">
+        <div class="head">
+            <h3><i class="fas fa-film"></i> Opening This Week</h3>
+            <form class="search-form">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Search movies...">
+                </div>
+            </form>
+        </div>
+        <hr>
+        <div class="filter">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="action">Action</button>
+            <button class="filter-btn" data-filter="horror">Horror</button>
+            <button class="filter-btn" data-filter="adventure">Adventure</button>
+            <button class="filter-btn" data-filter="comedy">Comedy</button>
+            <button class="filter-btn" data-filter="animation">Animation</button>
+        </div>
+    </section>
+
+    <section class="sec2">
+        <div class="movies" id="moviesGrid">
+            
+        </div>
+        <button class="load-more" id="loadMoreBtn">Load More <i class="fas fa-chevron-down"></i></button>
+    </section>
+
+    
+    <section class="trending-section" id="news">
+        <div class="section-header">
+            <h3><i class="fas fa-fire"></i> Trending Now</h3>
+        </div>
+        <div class="trending-container">
+            <div class="trending-card">
+                <div class="trending-img">
+                    <img src="./img/slides/slide13.jfif" alt="Trending">
+                    <div class="trending-overlay">
+                        <span class="trend-rank">#1</span>
+                        <a href="watch.html?movie=John Wick 1" class="play-btn"><i class="fas fa-play"></i></a>
+                    </div>
+                </div>
+                <div class="trending-info">
+                    <h5>John Wick 1</h5>
+                    <p>Sci-Fi | 2h 28min | <span class="rating"><i class="fas fa-star"></i> 8.8</span></p>
+                </div>
+            </div>
+            <div class="trending-card">
+                <div class="trending-img">
+                    <img src="./img/slides/slide11.jfif" alt="Trending">
+                    <div class="trending-overlay">
+                        <span class="trend-rank">#2</span>
+                        <a href="watch.html?movie=gotham" class="play-btn"><i class="fas fa-play"></i></a>
+                    </div>
+                </div>
+                <div class="trending-info">
+                    <h5>Gotham</h5>
+                    <p>Sci-Fi | 2h 49min | <span class="rating"><i class="fas fa-star"></i> 8.7</span></p>
+                </div>
+            </div>
+            <div class="trending-card">
+                <div class="trending-img">
+                    <img src="./img/slides/slide12.jfif" alt="Trending">
+                    <div class="trending-overlay">
+                        <span class="trend-rank">#3</span>
+                        <a href="watch.html?movie=john wick2" class="play-btn"><i class="fas fa-play"></i></a>
+                    </div>
+                </div>
+                <div class="trending-info">
+                    <h5>John Wick 2</h5>
+                    <p>Action | 3h 1min | <span class="rating"><i class="fas fa-star"></i> 8.4</span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <section class="newsletter">
+        <div class="newsletter-content">
+            <h3><i class="fas fa-envelope"></i> Stay Updated</h3>
+            <p>Get the latest movie releases and news delivered to your inbox.</p>
+            <form class="newsletter-form" onsubmit="handleNewsletter(event)">
+                <input type="email" placeholder="Enter your email" required>
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">Cinema<span>tify</span></div>
+            <div class="footer-links">
+                <a href="#home">Home</a>
+                <a href="#moviehead">Movies</a>
+                <a href="#news">News</a>
+                <a href="signin.html">Sign In</a>
+            </div>
+            <div class="footer-social">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+            <p class="footer-copy">&copy; 2026 Cinematify. All rights reserved.</p>
+        </div>
+    </footer>
+
+    
+    <nav class="mobile-nav">
+        <a href="index.html" class="mobile-nav-item active">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="#moviehead" class="mobile-nav-item">
+            <i class="fas fa-film"></i>
+            <span>Movies</span>
+        </a>
+        <a href="#news" class="mobile-nav-item">
+            <i class="fas fa-fire"></i>
+            <span>Trending</span>
+        </a>
+        <a href="signin.html" class="mobile-nav-item">
+            <i class="fas fa-user"></i>
+            <span>Account</span>
+        </a>
+    </nav>
+
+   
+    <div class="modal-overlay" id="movieModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <div class="modal-body" id="modalBody">
+              
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="toast" id="toast"></div>
+
+    <script src="main.js"></script>
+</body>
+</html>

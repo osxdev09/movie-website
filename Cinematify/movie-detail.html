@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Details - Cinematify</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body class="detail-page">
+    <div class="detail-hero">
+        <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=1920&h=800&fit=crop" alt="Movie Banner" id="detailHero">
+        <div class="detail-hero-overlay"></div>
+    </div>
+    
+    <div class="detail-content">
+        <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=300&h=450&fit=crop" alt="Movie Poster" class="detail-poster" id="detailPoster">
+        <div class="detail-info">
+            <h1 id="detailTitle">Movie Title</h1>
+            <div class="detail-meta" id="detailMeta">
+                <span class="rating"><i class="fas fa-star"></i> 8.0</span>
+                <span><i class="fas fa-clock"></i> 2h 00min</span>
+                <span><i class="fas fa-calendar"></i> 2026</span>
+                <span><i class="fas fa-film"></i> Action</span>
+            </div>
+            <p class="detail-desc" id="detailDesc">Movie description loading...</p>
+            <div class="detail-actions">
+                <a href="watch.html" class="btn-primary"><i class="fas fa-play"></i> Watch Now</a>
+                <a href="#" class="btn-secondary" onclick="showToast('Added to watchlist!')"><i class="fas fa-plus"></i> Add to List</a>
+                <a href="#" class="btn-secondary" onclick="showToast('Shared!')"><i class="fas fa-share-alt"></i> Share</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="detail-section">
+        <h3><i class="fas fa-users"></i> Cast</h3>
+        <div class="cast-list" id="detailCast">
+            <div class="cast-member">
+                <img src="https://ui-avatars.com/api/?name=Actor+1&background=ea1538&color=fff&size=60" alt="Actor">
+                <p>Actor 1</p>
+            </div>
+            <div class="cast-member">
+                <img src="https://ui-avatars.com/api/?name=Actor+2&background=ea1538&color=fff&size=60" alt="Actor">
+                <p>Actor 2</p>
+            </div>
+            <div class="cast-member">
+                <img src="https://ui-avatars.com/api/?name=Actor+3&background=ea1538&color=fff&size=60" alt="Actor">
+                <p>Actor 3</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="detail-section">
+        <h3><i class="fas fa-film"></i> Similar Movies</h3>
+        <div class="similar-grid" id="similarGrid">
+            <div class="mov1">
+                <div class="movie-poster">
+                    <span class="movie-rating"><i class="fas fa-star"></i> 7.5</span>
+                    <img src="https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?w=300&h=400&fit=crop" alt="Movie">
+                    <div class="movie-overlay"><i class="fas fa-play-circle"></i></div>
+                </div>
+                <h5>Similar Movie 1</h5>
+                <p>2hr 00min | ACTION</p>
+            </div>
+            <div class="mov1">
+                <div class="movie-poster">
+                    <span class="movie-rating"><i class="fas fa-star"></i> 8.0</span>
+                    <img src="https://images.unsplash.com/photo-1594909122845-11baa439b7bf?w=300&h=400&fit=crop" alt="Movie">
+                    <div class="movie-overlay"><i class="fas fa-play-circle"></i></div>
+                </div>
+                <h5>Similar Movie 2</h5>
+                <p>1hr 45min | ACTION</p>
+            </div>
+            <div class="mov1">
+                <div class="movie-poster">
+                    <span class="movie-rating"><i class="fas fa-star"></i> 7.8</span>
+                    <img src="https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?w=300&h=400&fit=crop" alt="Movie">
+                    <div class="movie-overlay"><i class="fas fa-play-circle"></i></div>
+                </div>
+                <h5>Similar Movie 3</h5>
+                <p>2hr 10min | ACTION</p>
+            </div>
+            <div class="mov1">
+                <div class="movie-poster">
+                    <span class="movie-rating"><i class="fas fa-star"></i> 8.2</span>
+                    <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?w=300&h=400&fit=crop" alt="Movie">
+                    <div class="movie-overlay"><i class="fas fa-play-circle"></i></div>
+                </div>
+                <h5>Similar Movie 4</h5>
+                <p>1hr 55min | ACTION</p>
+            </div>
+        </div>
+    </div>
+    
+    
+    <nav class="mobile-nav">
+        <a href="index.html" class="mobile-nav-item">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="index.html#moviehead" class="mobile-nav-item">
+            <i class="fas fa-film"></i>
+            <span>Movies</span>
+        </a>
+        <a href="index.html#news" class="mobile-nav-item">
+            <i class="fas fa-fire"></i>
+            <span>Trending</span>
+        </a>
+        <a href="signin.html" class="mobile-nav-item">
+            <i class="fas fa-user"></i>
+            <span>Account</span>
+        </a>
+    </nav>
+    
+    <div class="toast" id="toast"></div>
+    
+    <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Cinematify</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body class="signin-page">
+    <a href="index.html" class="back-home"><i class="fas fa-arrow-left"></i> Back to Home</a>
+    
+    <div class="signin-container">
+        <div class="signin-logo">
+            <h1>Cinema<span>tify</span></h1>
+            <p>Create your account</p>
+        </div>
+        
+        <form class="signin-form" onsubmit="handleSignUp(event)">
+            <div class="input-group">
+                <i class="fas fa-user"></i>
+                <input type="text" id="signupName" placeholder="Full name" required>
+            </div>
+            <div class="input-group">
+                <i class="fas fa-envelope"></i>
+                <input type="email" id="signupEmail" placeholder="Email address" required>
+            </div>
+            <div class="input-group">
+                <i class="fas fa-lock"></i>
+                <input type="password" id="signupPassword" placeholder="Password" required>
+            </div>
+            <div class="input-group">
+                <i class="fas fa-lock"></i>
+                <input type="password" id="signupConfirm" placeholder="Confirm password" required>
+            </div>
+            <button type="submit" class="signin-btn-full">Create Account</button>
+        </form>
+        
+        <div class="signin-divider">or sign up with</div>
+        
+        <div class="social-signin">
+            <button onclick="handleSocialSignIn('Google')" title="Sign up with Google"><i class="fab fa-google"></i></button>
+            <button onclick="handleSocialSignIn('Facebook')" title="Sign up with Facebook"><i class="fab fa-facebook-f"></i></button>
+            <button onclick="handleSocialSignIn('Apple')" title="Sign up with Apple"><i class="fab fa-apple"></i></button>
+        </div>
+        
+        <div class="signin-footer">
+            Already have an account? <a href="signin.html">Sign In</a>
+        </div>
+    </div>
+    
+    <div class="toast" id="toast"></div>
+    
+    <script src="main.js"></script>
+</body>
+</html>
