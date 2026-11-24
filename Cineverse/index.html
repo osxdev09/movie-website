@@ -1,0 +1,1544 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CineVerse - Discover Amazing Movies</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      /* ========== RESET & BASE ========== */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #0a0a0a;
+        color: #ffffff;
+        line-height: 1.6;
+      }
+
+      /* ========== NAVIGATION ========== */
+      .navbar {
+        background-color: #1a1a2e;
+        padding: 15px 50px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+      }
+
+      .logo {
+        font-size: 28px;
+        font-weight: bold;
+        color: #e94560;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .logo i {
+        color: #ff6b6b;
+      }
+
+      .nav-links {
+        display: flex;
+        list-style: none;
+        gap: 30px;
+        align-items: center;
+      }
+
+      .nav-links a {
+        color: #b8b8b8;
+        text-decoration: none;
+        font-size: 16px;
+        transition: all 0.3s ease;
+        position: relative;
+      }
+
+      .nav-links a:hover {
+        color: #e94560;
+      }
+
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: #e94560;
+        transition: width 0.3s ease;
+      }
+
+      .nav-links a:hover::after {
+        width: 100%;
+      }
+
+      .signin-btn {
+        background-color: #e94560;
+        color: white;
+        border: none;
+        padding: 10px 25px;
+        border-radius: 25px;
+        cursor: pointer;
+        font-size: 15px;
+        font-weight: bold;
+        transition: all 0.3s ease;
+      }
+
+      .signin-btn:hover {
+        background-color: #ff6b6b;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(233, 69, 96, 0.4);
+      }
+
+      /* ========== HERO SECTION ========== */
+      .hero {
+        margin-top: 70px;
+        height: 600px;
+        background: linear-gradient(
+          135deg,
+          #1a1a2e 0%,
+          #16213e 50%,
+          #0f3460 100%
+        );
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="%23e94560" opacity="0.3"/><circle cx="80" cy="40" r="1.5" fill="%23ff6b6b" opacity="0.2"/><circle cx="40" cy="80" r="1" fill="%23e94560" opacity="0.3"/><circle cx="90" cy="90" r="2.5" fill="%23ff6b6b" opacity="0.2"/></svg>');
+        background-size: 200px 200px;
+        animation: float 20s linear infinite;
+      }
+
+      @keyframes float {
+        0% {
+          transform: translateY(0) rotate(0deg);
+        }
+        100% {
+          transform: translateY(-50px) rotate(360deg);
+        }
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 1;
+        max-width: 800px;
+        padding: 0 20px;
+      }
+
+      .hero h1 {
+        font-size: 56px;
+        margin-bottom: 20px;
+        background: linear-gradient(45deg, #e94560, #ff6b6b, #ffd93d);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: gradient 3s ease infinite;
+      }
+
+      @keyframes gradient {
+        0%,
+        100% {
+          filter: hue-rotate(0deg);
+        }
+        50% {
+          filter: hue-rotate(30deg);
+        }
+      }
+
+      .hero p {
+        font-size: 20px;
+        color: #b8b8b8;
+        margin-bottom: 30px;
+      }
+
+      .hero-buttons {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .btn-primary {
+        background-color: #e94560;
+        color: white;
+        padding: 15px 40px;
+        border: none;
+        border-radius: 30px;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+      }
+
+      .btn-primary:hover {
+        background-color: #ff6b6b;
+        transform: translateY(-3px);
+        box-shadow: 0 10px 30px rgba(233, 69, 96, 0.4);
+      }
+
+      .btn-secondary {
+        background-color: transparent;
+        color: #e94560;
+        padding: 15px 40px;
+        border: 2px solid #e94560;
+        border-radius: 30px;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+      }
+
+      .btn-secondary:hover {
+        background-color: #e94560;
+        color: white;
+        transform: translateY(-3px);
+      }
+
+      /* ========== SEARCH BAR ========== */
+      .search-section {
+        background-color: #16213e;
+        padding: 40px 50px;
+        text-align: center;
+      }
+
+      .search-box {
+        max-width: 600px;
+        margin: 0 auto;
+        position: relative;
+      }
+
+      .search-box input {
+        width: 100%;
+        padding: 15px 50px 15px 20px;
+        border: 2px solid #0f3460;
+        border-radius: 50px;
+        background-color: #1a1a2e;
+        color: white;
+        font-size: 16px;
+        outline: none;
+        transition: all 0.3s ease;
+      }
+
+      .search-box input:focus {
+        border-color: #e94560;
+        box-shadow: 0 0 20px rgba(233, 69, 96, 0.2);
+      }
+
+      .search-box input::placeholder {
+        color: #666;
+      }
+
+      .search-box button {
+        position: absolute;
+        right: 5px;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: #e94560;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .search-box button:hover {
+        background-color: #ff6b6b;
+      }
+
+      /* ========== SECTION TITLES ========== */
+      .section-title {
+        text-align: center;
+        padding: 60px 20px 30px;
+        font-size: 36px;
+        color: #ffffff;
+        position: relative;
+      }
+
+      .section-title::after {
+        content: "";
+        display: block;
+        width: 80px;
+        height: 4px;
+        background-color: #e94560;
+        margin: 15px auto 0;
+        border-radius: 2px;
+      }
+
+      /* ========== MOVIE CARDS ========== */
+      .movies-container {
+        padding: 0 50px 60px;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 30px;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      .movie-card {
+        background-color: #16213e;
+        border-radius: 15px;
+        overflow: hidden;
+        transition: all 0.4s ease;
+        cursor: pointer;
+        position: relative;
+      }
+
+      .movie-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(233, 69, 96, 0.2);
+      }
+
+      .movie-poster {
+        width: 100%;
+        height: 350px;
+        object-fit: cover;
+        display: block;
+      }
+
+      .movie-info {
+        padding: 20px;
+      }
+
+      .movie-title {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 8px;
+        color: #ffffff;
+      }
+
+      .movie-meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+
+      .movie-rating {
+        color: #ffd93d;
+        font-weight: bold;
+      }
+
+      .movie-year {
+        color: #888;
+        font-size: 14px;
+      }
+
+      .movie-genre {
+        display: inline-block;
+        background-color: #0f3460;
+        color: #e94560;
+        padding: 4px 12px;
+        border-radius: 15px;
+        font-size: 12px;
+        margin-right: 5px;
+        margin-bottom: 5px;
+      }
+
+      .movie-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(233, 69, 96, 0.9);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .movie-card:hover .movie-overlay {
+        opacity: 1;
+      }
+
+      .play-btn {
+        width: 60px;
+        height: 60px;
+        background-color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #e94560;
+        font-size: 24px;
+        transform: scale(0);
+        transition: transform 0.3s ease;
+      }
+
+      .movie-card:hover .play-btn {
+        transform: scale(1);
+      }
+
+      /* ========== FEATURES SECTION ========== */
+      .features {
+        background-color: #1a1a2e;
+        padding: 60px 50px;
+      }
+
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 40px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .feature-box {
+        text-align: center;
+        padding: 30px;
+        background-color: #16213e;
+        border-radius: 15px;
+        transition: all 0.3s ease;
+        border: 1px solid #0f3460;
+      }
+
+      .feature-box:hover {
+        border-color: #e94560;
+        transform: translateY(-5px);
+      }
+
+      .feature-icon {
+        font-size: 48px;
+        color: #e94560;
+        margin-bottom: 20px;
+      }
+
+      .feature-box h3 {
+        font-size: 22px;
+        margin-bottom: 10px;
+        color: #ffffff;
+      }
+
+      .feature-box p {
+        color: #b8b8b8;
+        font-size: 15px;
+      }
+
+      /* ========== CATEGORIES ========== */
+      .categories {
+        padding: 0 50px 60px;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 15px;
+      }
+
+      .category-btn {
+        background-color: #16213e;
+        color: #b8b8b8;
+        border: 2px solid #0f3460;
+        padding: 10px 25px;
+        border-radius: 25px;
+        cursor: pointer;
+        font-size: 15px;
+        transition: all 0.3s ease;
+      }
+
+      .category-btn:hover,
+      .category-btn.active {
+        background-color: #e94560;
+        color: white;
+        border-color: #e94560;
+      }
+
+      /* ========== FOOTER ========== */
+      .footer {
+        background-color: #1a1a2e;
+        padding: 50px;
+        text-align: center;
+        border-top: 1px solid #0f3460;
+      }
+
+      .footer-logo {
+        font-size: 28px;
+        font-weight: bold;
+        color: #e94560;
+        margin-bottom: 20px;
+      }
+
+      .footer-links {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+      }
+
+      .footer-links a {
+        color: #b8b8b8;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .footer-links a:hover {
+        color: #e94560;
+      }
+
+      .social-icons {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin-bottom: 20px;
+      }
+
+      .social-icons a {
+        width: 40px;
+        height: 40px;
+        background-color: #16213e;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #b8b8b8;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        border: 1px solid #0f3460;
+      }
+
+      .social-icons a:hover {
+        background-color: #e94560;
+        color: white;
+        border-color: #e94560;
+        transform: translateY(-3px);
+      }
+
+      .footer p {
+        color: #666;
+        font-size: 14px;
+      }
+
+      /* ========== SIGN IN MODAL ========== */
+      .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 2000;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .modal-overlay.active {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .modal {
+        background-color: #1a1a2e;
+        padding: 40px;
+        border-radius: 20px;
+        width: 90%;
+        max-width: 400px;
+        position: relative;
+        transform: scale(0.8);
+        transition: transform 0.3s ease;
+        border: 1px solid #0f3460;
+      }
+
+      .modal-overlay.active .modal {
+        transform: scale(1);
+      }
+
+      .modal-close {
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        background: none;
+        border: none;
+        color: #888;
+        font-size: 24px;
+        cursor: pointer;
+        transition: color 0.3s ease;
+      }
+
+      .modal-close:hover {
+        color: #e94560;
+      }
+
+      .modal h2 {
+        text-align: center;
+        margin-bottom: 25px;
+        color: #e94560;
+        font-size: 28px;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        color: #b8b8b8;
+        font-size: 14px;
+      }
+
+      .form-group input {
+        width: 100%;
+        padding: 12px 15px;
+        border: 2px solid #0f3460;
+        border-radius: 10px;
+        background-color: #16213e;
+        color: white;
+        font-size: 15px;
+        outline: none;
+        transition: all 0.3s ease;
+      }
+
+      .form-group input:focus {
+        border-color: #e94560;
+      }
+
+      .form-group input::placeholder {
+        color: #555;
+      }
+
+      .submit-btn {
+        width: 100%;
+        padding: 14px;
+        background-color: #e94560;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-top: 10px;
+      }
+
+      .submit-btn:hover {
+        background-color: #ff6b6b;
+      }
+
+      .modal-footer {
+        text-align: center;
+        margin-top: 20px;
+        color: #888;
+        font-size: 14px;
+      }
+
+      .modal-footer a {
+        color: #e94560;
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      .modal-footer a:hover {
+        text-decoration: underline;
+      }
+
+      .error-msg {
+        color: #ff6b6b;
+        font-size: 13px;
+        margin-top: 5px;
+        display: none;
+      }
+
+      .success-msg {
+        color: #4ecca3;
+        font-size: 14px;
+        text-align: center;
+        margin-top: 10px;
+        display: none;
+      }
+
+      /* ========== MOBILE MENU ========== */
+      .mobile-menu-btn {
+        display: none;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 24px;
+        cursor: pointer;
+      }
+
+      /* ========== SCROLL TO TOP ========== */
+      .scroll-top {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 50px;
+        height: 50px;
+        background-color: #e94560;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 20px;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 999;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba(233, 69, 96, 0.4);
+      }
+
+      .scroll-top:hover {
+        background-color: #ff6b6b;
+        transform: translateY(-3px);
+      }
+
+      .scroll-top.show {
+        display: flex;
+      }
+
+      /* ========== MEDIA QUERIES ========== */
+      @media screen and (max-width: 768px) {
+        .navbar {
+          padding: 15px 20px;
+        }
+
+        .nav-links {
+          position: fixed;
+          top: 70px;
+          left: 0;
+          right: 0;
+          background-color: #1a1a2e;
+          flex-direction: column;
+          padding: 20px;
+          gap: 15px;
+          transform: translateY(-150%);
+          transition: transform 0.3s ease;
+          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-links.active {
+          transform: translateY(0);
+        }
+
+        .mobile-menu-btn {
+          display: block;
+        }
+
+        .hero {
+          height: 500px;
+        }
+
+        .hero h1 {
+          font-size: 36px;
+        }
+
+        .hero p {
+          font-size: 16px;
+        }
+
+        .hero-buttons {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .btn-primary,
+        .btn-secondary {
+          width: 200px;
+          text-align: center;
+        }
+
+        .movies-container {
+          padding: 0 20px 40px;
+          grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+          gap: 15px;
+        }
+
+        .movie-poster {
+          height: 240px;
+        }
+
+        .search-section {
+          padding: 30px 20px;
+        }
+
+        .features {
+          padding: 40px 20px;
+        }
+
+        .categories {
+          padding: 0 20px 40px;
+        }
+
+        .section-title {
+          font-size: 28px;
+          padding: 40px 20px 20px;
+        }
+
+        .footer {
+          padding: 30px 20px;
+        }
+
+        .footer-links {
+          flex-direction: column;
+          gap: 15px;
+        }
+      }
+
+      @media screen and (max-width: 480px) {
+        .hero h1 {
+          font-size: 28px;
+        }
+
+        .movies-container {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 10px;
+        }
+
+        .movie-info {
+          padding: 12px;
+        }
+
+        .movie-title {
+          font-size: 14px;
+        }
+
+        .modal {
+          padding: 30px 20px;
+        }
+      }
+
+      /* ========== LOADING ANIMATION ========== */
+      .loading {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 3px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        border-top-color: white;
+        animation: spin 1s ease-in-out infinite;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* ========== NOTIFICATION ========== */
+      .notification {
+        position: fixed;
+        top: 90px;
+        right: 20px;
+        background-color: #4ecca3;
+        color: white;
+        padding: 15px 25px;
+        border-radius: 10px;
+        font-weight: bold;
+        z-index: 3000;
+        transform: translateX(400px);
+        transition: transform 0.3s ease;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+      }
+
+      .notification.show {
+        transform: translateX(0);
+      }
+
+      .notification.error {
+        background-color: #ff6b6b;
+      }
+    </style>
+  </head>
+  <body>
+    
+    <nav class="navbar">
+      <a href="#" class="logo">
+        <i class="fas fa-film"></i>
+        CineVerse
+      </a>
+      <button class="mobile-menu-btn" onclick="toggleMenu()">
+        <i class="fas fa-bars"></i>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#movies">Movies</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#categories">Categories</a></li>
+        <li>
+          <button class="signin-btn" onclick="openModal('signin')">
+            Sign In
+          </button>
+        </li>
+      </ul>
+    </nav>
+
+    
+    <section class="hero" id="home">
+      <div class="hero-content">
+        <h1>Welcome to CineVerse</h1>
+        <p>
+          Discover thousands of movies, create your watchlist, and enjoy the
+          best cinematic experience.
+        </p>
+        <div class="hero-buttons">
+          <a href="#movies" class="btn-primary">
+            <i class="fas fa-play"></i> Browse Movies
+          </a>
+          <a
+            href="#"
+            class="btn-secondary"
+            onclick="
+              openModal('signup');
+              return false;
+            "
+          >
+            <i class="fas fa-user-plus"></i> Get Started
+          </a>
+        </div>
+      </div>
+    </section>
+
+    
+    <section class="search-section">
+      <div class="search-box">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search for movies, genres, actors..."
+          onkeyup="searchMovies()"
+        />
+        <button onclick="searchMovies()">
+          <i class="fas fa-search"></i>
+        </button>
+      </div>
+    </section>
+
+    
+    <h2 class="section-title" id="movies">Trending Now</h2>
+    <div class="movies-container" id="trendingMovies">
+      
+    </div>
+
+    
+    <section class="features" id="features">
+      <h2 class="section-title">Why Choose CineVerse</h2>
+      <div class="features-grid">
+        <div class="feature-box">
+          <div class="feature-icon">
+            <i class="fas fa-infinity"></i>
+          </div>
+          <h3>Unlimited Access</h3>
+          <p>
+            Watch unlimited movies and TV shows anytime, anywhere without any
+            restrictions.
+          </p>
+        </div>
+        <div class="feature-box">
+          <div class="feature-icon">
+            <i class="fas fa-hd"></i>
+          </div>
+          <h3>HD Quality</h3>
+          <p>
+            Enjoy crystal clear HD and 4K streaming for the ultimate viewing
+            experience.
+          </p>
+        </div>
+        <div class="feature-box">
+          <div class="feature-icon">
+            <i class="fas fa-download"></i>
+          </div>
+          <h3>Download & Watch</h3>
+          <p>
+            Download your favorite movies and watch them offline on any device.
+          </p>
+        </div>
+        <div class="feature-box">
+          <div class="feature-icon">
+            <i class="fas fa-heart"></i>
+          </div>
+          <h3>Personalized</h3>
+          <p>
+            Get personalized recommendations based on your viewing history and
+            preferences.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    
+    <h2 class="section-title" id="categories">Browse by Category</h2>
+    <div class="categories">
+      <button class="category-btn active" onclick="filterCategory('all', this)">
+        All
+      </button>
+      <button class="category-btn" onclick="filterCategory('action', this)">
+        Action
+      </button>
+      <button class="category-btn" onclick="filterCategory('drama', this)">
+        Drama
+      </button>
+      <button class="category-btn" onclick="filterCategory('comedy', this)">
+        Comedy
+      </button>
+      <button class="category-btn" onclick="filterCategory('scifi', this)">
+        Sci-Fi
+      </button>
+      <button class="category-btn" onclick="filterCategory('horror', this)">
+        Horror
+      </button>
+      <button class="category-btn" onclick="filterCategory('romance', this)">
+        Romance
+      </button>
+    </div>
+
+    <div class="movies-container" id="categoryMovies">
+      
+    </div>
+
+    
+    <footer class="footer">
+      <div class="footer-logo"><i class="fas fa-film"></i> CineVerse</div>
+      <div class="footer-links">
+        <a href="#">About Us</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Contact</a>
+        <a href="#">Help Center</a>
+      </div>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+      </div>
+      <p>
+        &copy; 2026 CineVerse. All rights reserved. Made with
+        <i class="fas fa-heart" style="color: #e94560"></i> for movie lovers.
+      </p>
+    </footer>
+
+    
+    <div class="modal-overlay" id="signinModal">
+      <div class="modal">
+        <button class="modal-close" onclick="closeModal('signin')">
+          &times;
+        </button>
+        <h2><i class="fas fa-user-circle"></i> Sign In</h2>
+        <form id="signinForm" onsubmit="handleSignIn(event)">
+          <div class="form-group">
+            <label>Email Address</label>
+            <input
+              type="email"
+              id="signinEmail"
+              placeholder="Enter your email"
+              required
+            />
+            <span class="error-msg" id="signinEmailError"
+              >Please enter a valid email</span
+            >
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <input
+              type="password"
+              id="signinPassword"
+              placeholder="Enter your password"
+              required
+            />
+            <span class="error-msg" id="signinPasswordError"
+              >Password must be at least 6 characters</span
+            >
+          </div>
+          <button type="submit" class="submit-btn" id="signinSubmit">
+            Sign In
+          </button>
+          <div class="success-msg" id="signinSuccess">
+            Welcome back! Redirecting...
+          </div>
+        </form>
+        <div class="modal-footer">
+          Don't have an account? <a onclick="switchModal('signup')">Sign Up</a>
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="modal-overlay" id="signupModal">
+      <div class="modal">
+        <button class="modal-close" onclick="closeModal('signup')">
+          &times;
+        </button>
+        <h2><i class="fas fa-user-plus"></i> Sign Up</h2>
+        <form id="signupForm" onsubmit="handleSignUp(event)">
+          <div class="form-group">
+            <label>Full Name</label>
+            <input
+              type="text"
+              id="signupName"
+              placeholder="Enter your full name"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label>Email Address</label>
+            <input
+              type="email"
+              id="signupEmail"
+              placeholder="Enter your email"
+              required
+            />
+            <span class="error-msg" id="signupEmailError"
+              >Please enter a valid email</span
+            >
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <input
+              type="password"
+              id="signupPassword"
+              placeholder="Create a password"
+              required
+            />
+            <span class="error-msg" id="signupPasswordError"
+              >Password must be at least 6 characters</span
+            >
+          </div>
+          <div class="form-group">
+            <label>Confirm Password</label>
+            <input
+              type="password"
+              id="signupConfirm"
+              placeholder="Confirm your password"
+              required
+            />
+            <span class="error-msg" id="signupConfirmError"
+              >Passwords do not match</span
+            >
+          </div>
+          <button type="submit" class="submit-btn" id="signupSubmit">
+            Create Account
+          </button>
+          <div class="success-msg" id="signupSuccess">
+            Account created successfully!
+          </div>
+        </form>
+        <div class="modal-footer">
+          Already have an account?
+          <a onclick="switchModal('signin')">Sign In</a>
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="notification" id="notification"></div>
+
+    
+    <button class="scroll-top" id="scrollTop" onclick="scrollToTop()">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+
+    
+    <script>
+      // ========== MOVIE DATA ==========
+      const movies = [
+        {
+          id: 1,
+          title: "Inception",
+          year: "2010",
+          rating: "8.8",
+          genre: ["scifi", "action"],
+          poster:
+            "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=400&h=600&fit=crop",
+        },
+        {
+          id: 2,
+          title: "The Dark Knight",
+          year: "2008",
+          rating: "9.0",
+          genre: ["action", "drama"],
+          poster:
+            "https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=400&h=600&fit=crop",
+        },
+        {
+          id: 3,
+          title: "Interstellar",
+          year: "2014",
+          rating: "8.6",
+          genre: ["scifi", "drama"],
+          poster:
+            "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=400&h=600&fit=crop",
+        },
+        {
+          id: 4,
+          title: "The Shawshank Redemption",
+          year: "1994",
+          rating: "9.3",
+          genre: ["drama"],
+          poster:
+            "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=400&h=600&fit=crop",
+        },
+        {
+          id: 5,
+          title: "Pulp Fiction",
+          year: "1994",
+          rating: "8.9",
+          genre: ["drama", "action"],
+          poster:
+            "https://images.unsplash.com/photo-1594909122849-11daa4e4d2f2?w=400&h=600&fit=crop",
+        },
+        {
+          id: 6,
+          title: "The Matrix",
+          year: "1999",
+          rating: "8.7",
+          genre: ["scifi", "action"],
+          poster:
+            "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=400&h=600&fit=crop",
+        },
+        {
+          id: 7,
+          title: "Forrest Gump",
+          year: "1994",
+          rating: "8.8",
+          genre: ["drama", "romance"],
+          poster:
+            "https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?w=400&h=600&fit=crop",
+        },
+        {
+          id: 8,
+          title: "The Conjuring",
+          year: "2013",
+          rating: "7.5",
+          genre: ["horror"],
+          poster:
+            "https://images.unsplash.com/photo-1509248961158-e54f6934749c?w=400&h=600&fit=crop",
+        },
+      ];
+
+      // ========== RENDER MOVIES ==========
+      function renderMovies(containerId, movieList) {
+        const container = document.getElementById(containerId);
+        container.innerHTML = "";
+
+        movieList.forEach((movie) => {
+          const card = document.createElement("div");
+          card.className = "movie-card";
+          card.innerHTML = `
+                    <img src="${movie.poster}" alt="${movie.title}" class="movie-poster" onerror="this.src='https://via.placeholder.com/400x600/16213e/e94560?text=${encodeURIComponent(movie.title)}'">
+                    <div class="movie-overlay">
+                        <div class="play-btn">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="movie-info">
+                        <div class="movie-title">${movie.title}</div>
+                        <div class="movie-meta">
+                            <span class="movie-rating">
+                                <i class="fas fa-star"></i> ${movie.rating}
+                            </span>
+                            <span class="movie-year">${movie.year}</span>
+                        </div>
+                        <div>
+                            ${movie.genre.map((g) => `<span class="movie-genre">${g}</span>`).join("")}
+                        </div>
+                    </div>
+                `;
+
+          // Add click event to show movie details
+          card.addEventListener("click", () => {
+            showNotification(`Now playing: ${movie.title}`, "success");
+          });
+
+          container.appendChild(card);
+        });
+      }
+
+      // ========== INITIAL RENDER ==========
+      renderMovies("trendingMovies", movies);
+      renderMovies("categoryMovies", movies);
+
+      // ========== SEARCH FUNCTION ==========
+      function searchMovies() {
+        const searchTerm = document
+          .getElementById("searchInput")
+          .value.toLowerCase();
+        const filtered = movies.filter(
+          (movie) =>
+            movie.title.toLowerCase().includes(searchTerm) ||
+            movie.genre.some((g) => g.toLowerCase().includes(searchTerm)) ||
+            movie.year.includes(searchTerm),
+        );
+        renderMovies("trendingMovies", filtered);
+
+        if (filtered.length === 0) {
+          document.getElementById("trendingMovies").innerHTML = `
+                    <div style="grid-column: 1/-1; text-align: center; padding: 40px; color: #888;">
+                        <i class="fas fa-search" style="font-size: 48px; margin-bottom: 15px; color: #e94560;"></i>
+                        <h3>No movies found</h3>
+                        <p>Try searching with different keywords</p>
+                    </div>
+                `;
+        }
+      }
+
+      // ========== CATEGORY FILTER ==========
+      function filterCategory(category, btn) {
+        // Update active button
+        document
+          .querySelectorAll(".category-btn")
+          .forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+
+        // Filter movies
+        if (category === "all") {
+          renderMovies("categoryMovies", movies);
+        } else {
+          const filtered = movies.filter((movie) =>
+            movie.genre.includes(category),
+          );
+          renderMovies("categoryMovies", filtered);
+        }
+      }
+
+      // ========== MODAL FUNCTIONS ==========
+      function openModal(type) {
+        document.getElementById(type + "Modal").classList.add("active");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeModal(type) {
+        document.getElementById(type + "Modal").classList.remove("active");
+        document.body.style.overflow = "auto";
+        // Reset form
+        document.getElementById(type + "Form").reset();
+        hideAllErrors();
+      }
+
+      function switchModal(type) {
+        closeModal(type === "signin" ? "signup" : "signin");
+        setTimeout(() => openModal(type), 300);
+      }
+
+      // Close modal when clicking outside
+      document.querySelectorAll(".modal-overlay").forEach((overlay) => {
+        overlay.addEventListener("click", (e) => {
+          if (e.target === overlay) {
+            overlay.classList.remove("active");
+            document.body.style.overflow = "auto";
+          }
+        });
+      });
+
+      // ========== FORM VALIDATION ==========
+      function validateEmail(email) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      }
+
+      function showError(id, show) {
+        document.getElementById(id).style.display = show ? "block" : "none";
+      }
+
+      function hideAllErrors() {
+        document
+          .querySelectorAll(".error-msg")
+          .forEach((el) => (el.style.display = "none"));
+        document
+          .querySelectorAll(".success-msg")
+          .forEach((el) => (el.style.display = "none"));
+      }
+
+      // ========== SIGN IN HANDLER ==========
+      function handleSignIn(e) {
+        e.preventDefault();
+        hideAllErrors();
+
+        const email = document.getElementById("signinEmail").value;
+        const password = document.getElementById("signinPassword").value;
+        let isValid = true;
+
+        if (!validateEmail(email)) {
+          showError("signinEmailError", true);
+          isValid = false;
+        }
+
+        if (password.length < 6) {
+          showError("signinPasswordError", true);
+          isValid = false;
+        }
+
+        if (isValid) {
+          const btn = document.getElementById("signinSubmit");
+          const originalText = btn.innerHTML;
+          btn.innerHTML = '<span class="loading"></span>';
+          btn.disabled = true;
+
+          // Simulate API call
+          setTimeout(() => {
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+            document.getElementById("signinSuccess").style.display = "block";
+
+            setTimeout(() => {
+              closeModal("signin");
+              showNotification(
+                "Welcome back! You are now signed in.",
+                "success",
+              );
+              // Update nav button
+              document.querySelector(".signin-btn").innerHTML =
+                '<i class="fas fa-user"></i> My Account';
+            }, 1500);
+          }, 1500);
+        }
+      }
+
+      // ========== SIGN UP HANDLER ==========
+      function handleSignUp(e) {
+        e.preventDefault();
+        hideAllErrors();
+
+        const name = document.getElementById("signupName").value;
+        const email = document.getElementById("signupEmail").value;
+        const password = document.getElementById("signupPassword").value;
+        const confirm = document.getElementById("signupConfirm").value;
+        let isValid = true;
+
+        if (!validateEmail(email)) {
+          showError("signupEmailError", true);
+          isValid = false;
+        }
+
+        if (password.length < 6) {
+          showError("signupPasswordError", true);
+          isValid = false;
+        }
+
+        if (password !== confirm) {
+          showError("signupConfirmError", true);
+          isValid = false;
+        }
+
+        if (isValid) {
+          const btn = document.getElementById("signupSubmit");
+          const originalText = btn.innerHTML;
+          btn.innerHTML = '<span class="loading"></span>';
+          btn.disabled = true;
+
+          // Simulate API call
+          setTimeout(() => {
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+            document.getElementById("signupSuccess").style.display = "block";
+
+            setTimeout(() => {
+              closeModal("signup");
+              showNotification(
+                `Welcome, ${name}! Your account has been created.`,
+                "success",
+              );
+            }, 1500);
+          }, 1500);
+        }
+      }
+
+      // ========== NOTIFICATION ==========
+      function showNotification(message, type = "success") {
+        const notif = document.getElementById("notification");
+        notif.textContent = message;
+        notif.className = "notification " + type;
+        notif.classList.add("show");
+
+        setTimeout(() => {
+          notif.classList.remove("show");
+        }, 3000);
+      }
+
+      // ========== MOBILE MENU ==========
+      function toggleMenu() {
+        document.getElementById("navLinks").classList.toggle("active");
+      }
+
+      // Close mobile menu when clicking a link
+      document.querySelectorAll(".nav-links a").forEach((link) => {
+        link.addEventListener("click", () => {
+          document.getElementById("navLinks").classList.remove("active");
+        });
+      });
+
+      // ========== SCROLL TO TOP ==========
+      const scrollTopBtn = document.getElementById("scrollTop");
+
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 500) {
+          scrollTopBtn.classList.add("show");
+        } else {
+          scrollTopBtn.classList.remove("show");
+        }
+      });
+
+      function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      // ========== SMOOTH SCROLL FOR NAV LINKS ==========
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          const href = this.getAttribute("href");
+          if (href !== "#") {
+            e.preventDefault();
+            const target = document.querySelector(href);
+            if (target) {
+              target.scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+          }
+        });
+      });
+
+      // ========== ANIMATE ON SCROLL ==========
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = "1";
+            entry.target.style.transform = "translateY(0)";
+          }
+        });
+      }, observerOptions);
+
+      // Observe movie cards and feature boxes
+      document.querySelectorAll(".movie-card, .feature-box").forEach((el) => {
+        el.style.opacity = "0";
+        el.style.transform = "translateY(30px)";
+        el.style.transition = "all 0.6s ease";
+        observer.observe(el);
+      });
+    </script>
+  </body>
+</html>
